@@ -1,0 +1,11 @@
+.grid-full {
+  grid-column: 1 / -1;
+}
+
+.flex-between {
+  @include display-flex(row, space-between, center);
+}
+
+.grid {
+  @include display-grid(12, 30px, 30px);
+}

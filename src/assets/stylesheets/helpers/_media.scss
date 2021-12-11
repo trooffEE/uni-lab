@@ -1,0 +1,77 @@
+$scales: (
+  'm_sm': 320px,
+  'm_md': 480px,
+  'm_lg': 600px,
+  't_sm': 720px,
+  't_md': 768px,
+  't_lg': 1024px,
+  'd_sm': 1280px,
+  'd_md': 1380px,
+  'd_lg': 1600px,
+) !default;
+
+@mixin at($scale) {
+  @if type-of($scale) == string {
+    $breakpoint: map-get($scales, $scale);
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  } @else {
+    $breakpoint: $scale;
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+@mixin below($scale) {
+  @if type-of($scale) == string {
+    $breakpoint: map-get($scales, $scale) - 1;
+    @media (max-width: $breakpoint) {
+      @content;
+    }
+  } @else {
+    $breakpoint: $scale - 1;
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+@mixin between($scale-min, $scale-max) {
+  @if type-of($scale-min) == string and type-of($scale-max) == number {
+    $bp-min: map-get($scales, $scale-min);
+    $bp-max: $scale-max - 1;
+
+    @media (min-width: $bp-min) and (max-width: $bp-max) {
+      @content;
+    }
+  }
+
+  @if type-of($scale-min) == string and type-of($scale-max) == string {
+    $bp-min: map-get($scales, $scale-min);
+    $bp-max: map-get($scales, $scale-max) - 1;
+
+    @media (min-width: $bp-min) and (max-width: $bp-max) {
+      @content;
+    }
+  }
+
+  @if type-of($scale-min) == number and type-of($scale-max) == string {
+    $bp-min: $scale-min;
+    $bp-max: map-get($scales, $scale-max) - 1;
+
+    @media (min-width: $bp-min) and (max-width: $bp-max) {
+      @content;
+    }
+  }
+
+  @if type-of($scale-min) == number and type-of($scale-max) == number {
+    $bp-min: $scale-min;
+    $bp-max: $scale-max - 1;
+
+    @media (min-width: $bp-min) and (max-width: $bp-max) {
+      @content;
+    }
+  }
+}
