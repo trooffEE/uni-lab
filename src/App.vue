@@ -10,9 +10,6 @@ div
 import { MetaInfo } from 'vue-meta'
 import { Vue, Component } from 'vue-property-decorator'
 
-// Store
-import AuthModule from '@/store/modules/auth'
-import SystemModule from '@/store/modules/system'
 // Components
 import Header from '@/views/header/Header.vue'
 import Footer from '@/views/Footer.vue'
@@ -24,21 +21,9 @@ import Footer from '@/views/Footer.vue'
   },
 })
 export default class App extends Vue {
-  private get loading () {
-    return SystemModule.loading
-  }
-
-  private get user () {
-    return AuthModule.self
-  }
-
-  private mounted() {
-    AuthModule.csrfToken()
-  }
-
   private metaInfo (): MetaInfo {
     return {
-      title: 'Для сдачи фигни',
+      title: 'Для сдачи работы',
       titleTemplate: '%s - 4ки хватит',
     }
   }}

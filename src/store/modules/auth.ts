@@ -67,13 +67,6 @@ class Auth extends VuexModule {
   // ---------------------------- Authorization ---------------------------- >>
 
   @Action({ rawError: true })
-  async csrfToken () {
-    const { data }: AxiosResponse<IAuthResponse> = await api.get('/csrf')
-
-    return data
-  }
-
-  @Action({ rawError: true })
   async login (payload: IRegisterForm) {
     const { data }: AxiosResponse<IAuthResponse> = await api.post(
       '/auth/login',
