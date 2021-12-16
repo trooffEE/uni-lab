@@ -1,5 +1,6 @@
 <template lang='pug'>
 .form
+  h3.center Регистрация
   VTextField(
     v-model='form.userName'
   )

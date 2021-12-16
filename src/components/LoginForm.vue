@@ -1,5 +1,6 @@
 <template lang='pug'>
 .form
+  h3.center Авторизация
   VTextField(
     v-model='form.userName'
   )
@@ -7,10 +8,12 @@
     v-model='form.password'
     type="password"
   )
-  RouterLink(to="/auth/register") Зарегестриоваться
-  VBtn(
-    @click="handleLogin"
-  ) Войти
+  .button-container
+    VBtn(text)
+      RouterLink(to="/auth/register") Зарегестриоваться
+    VBtn(
+      @click="handleLogin"
+    ) Войти
 </template>
 <script lang='ts'>
 import Vue from 'vue'
@@ -19,7 +22,7 @@ import Component from 'vue-class-component'
 import AuthModule from '@/store/modules/auth'
 
 interface IRegistrationForm {
-  userName: string, 
+  userName: string,
   password: string,
 }
 
@@ -40,5 +43,12 @@ export default class RegistrationForm extends Vue {
   @include display-flex(column, center, center);
   background-color: '#005BC1';
   border-radius: 8px;
+}
+
+.button-container {
+  @include display-flex(column, center, center);
+  > button:not(:last-child) {
+    margin-bottom: 10px;
+  }
 }
 </style>

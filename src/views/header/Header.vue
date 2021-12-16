@@ -1,8 +1,8 @@
 <template lang="pug">
   Wrapper.header
-    img(src="~@/assets/images/logo.svg")
-    // ToDo переписать на 'реверснутый' isAutheicated
-    .link-container(v-if="!isAutheicated")
+    RouterLink(to="/drone")
+      img(src="~@/assets/images/logo.svg")
+    .link-container(v-if="isAutheicated")
       RouterLink(:to="routerLink.to" v-for="routerLink in routerLinks" :key="routerLink.to") {{ routerLink.name }}
 </template>
 <script lang='ts'>
@@ -18,6 +18,8 @@ import AuthModule from '@/store/modules/auth'
   },
 })
 export default class Header extends Vue {
+
+  // ToDo: переписать на getter
   private isAdmin = false
 
   private get isAutheicated() {
@@ -43,7 +45,7 @@ export default class Header extends Vue {
     if (this.isAdmin) localLinks.push({ name: 'Админ Панель', to: '/admin-panel' })
 
     return localLinks
-  } 
+  }
 }
 </script>
 
@@ -60,7 +62,7 @@ export default class Header extends Vue {
     @include display-flex(row, flex-start, center);
     > a {
       font-weight: $weight-emphis;
-      @include inline-space(28px) 
+      @include inline-space(28px)
     }
     a:hover,
     a:focus {

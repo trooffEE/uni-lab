@@ -1,5 +1,5 @@
 <template lang="pug">
-  div This is 404 page
+  div Ничего не найдено
 </template>
 
 <script lang="ts">
@@ -10,7 +10,7 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class NotFound extends Vue {
   private metaInfo (): MetaInfo {
     return {
-      title: 'NotFound',
+      title: '404',
     }
   }
 }
