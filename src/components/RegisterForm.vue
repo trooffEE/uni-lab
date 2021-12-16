@@ -8,9 +8,12 @@
     v-model='form.password'
     type="password"
   )
-  VBtn(
-    @click="handleRegistration"
-  ) Зарегистрироваться
+  .button-container
+    VBtn(text)
+      RouterLink(to="/auth/login") Авторизация
+    VBtn(
+      @click="handleRegistration"
+    ) Зарегистрироваться
 </template>
 <script lang='ts'>
 import Vue from 'vue'
@@ -36,5 +39,12 @@ export default class RegistrationForm extends Vue {
   @include display-flex(column, center, center);
   background-color: '#005BC1';
   border-radius: 8px;
+}
+
+.button-container {
+  @include display-flex(column, center, center);
+  > button:not(:last-child) {
+    margin-bottom: 10px;
+  }
 }
 </style>
