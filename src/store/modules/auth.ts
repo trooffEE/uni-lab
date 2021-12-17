@@ -1,11 +1,9 @@
 import { AxiosResponse } from 'axios'
 import { Action, Module, Mutation, VuexModule, getModule } from 'vuex-module-decorators'
-import Cookies from 'js-cookie'
 
 import store from '@/store'
 import { IAuthResponse, IAuthUser, IRegisterForm } from '@/store/types'
 import api from '@/utils/services/api'
-import { authTokenName } from '@/utils/services/config'
 
 /**
  * Работа с авторизацией пользователя
@@ -29,10 +27,8 @@ class Auth extends VuexModule {
 
   @Mutation
   setToken (payload: string) {
+    localStorage.set('token', payload)
     this.token = payload
-    if (process.env.NODE_ENV === 'development') {
-      Cookies.set(authTokenName, payload)
-    }
   }
 
   // ---------------------------- User ---------------------------- >>

@@ -18,7 +18,7 @@ api.interceptors.request.use(
   config => {
     SystemModule.loadingStart()
 
-    config.withCredentials = true
+    config.headers.token = localStorage.getItem('token')
 
     // if (config.data) {
     //   config.data = snakeCaseKeys(config.data)
