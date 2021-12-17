@@ -2,8 +2,9 @@
   .image-container
     .blue-box
       Heading(size="h2").local-title СРЕШЬ?
-      p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer convallis molestie augue 
-      button.styled-button Перейти
+      p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer convallis molestie augue
+      RouterLink(:to="{ name: 'aboutUs' }")  
+        button.styled-button Перейти
 </template>
 <script lang='ts'>
 import Vue from 'vue'
