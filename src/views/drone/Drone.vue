@@ -12,6 +12,8 @@ import Component from 'vue-class-component'
 import Wrapper from '@/components/Wrapper.vue'
 import DronesPreview from '@/components/views/drones/DronesPreview.vue'
 import DronesList from '@/components/views/drones/DronesList.vue'
+// Store
+import DroneModule from '@/store/modules/drone'
 
 @Component({
   components: {
@@ -21,6 +23,15 @@ import DronesList from '@/components/views/drones/DronesList.vue'
   },
 })
 export default class Drone extends Vue {
-  
+  private isLoaded = false
+
+  private created() {
+    this.fetchDrones()
+  }
+
+  private fetchDrones() {
+    DroneModule.fetchDrones()
+      .finally(() => this.isLoaded = true)
+  }
 }
 </script>

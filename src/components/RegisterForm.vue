@@ -31,6 +31,7 @@ export default class RegistrationForm extends Vue {
 
   private handleRegistration() {
     AuthModule.registration(this.form)
+      .then(() => this.$router.push({ name: 'auth.login' }))
   }
 }
 </script>

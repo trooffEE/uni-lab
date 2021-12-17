@@ -35,6 +35,7 @@ export default class RegistrationForm extends Vue {
 
   private handleLogin() {
     AuthModule.login(this.form)
+      .then(() => this.$router.push('/drone'))
   }
 }
 </script>

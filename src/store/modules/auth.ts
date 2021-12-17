@@ -27,7 +27,7 @@ class Auth extends VuexModule {
 
   @Mutation
   setToken (payload: string) {
-    localStorage.set('token', payload)
+    localStorage.setItem('token', payload)
     this.token = payload
   }
 
