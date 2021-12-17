@@ -1,8 +1,13 @@
 <template lang="pug">
-  Wrapper 
-    Heading.grid-full.title Quadro Corpo
-    DroneContent.grid-full
-    DroneGallery.grid-full
+  Wrapper(v-if="isLoaded") 
+    Heading.grid-full.title {{ drone.name }}
+    DroneContent(
+      :drone="drone"
+    ).grid-full 
+    DroneGallery(
+      :droneGallery="drone.photoUrl"
+      :video="drone.videoUrl"
+    ).grid-full
     DroneYandexMarket.grid-full
 </template>
 <script lang='ts'>
@@ -15,6 +20,8 @@ import DroneContent from '@/components/views/drone/DroneContent.vue'
 import DroneYandexMarket from '@/components/views/drone/DroneYandexMarket.vue'
 import Wrapper from '@/components/Wrapper.vue'
 import Heading from '@/components/_uikit/typography/Heading.vue'
+// Store
+import DroneModule from '@/store/modules/drone'
 
 @Component({
   components: {
@@ -26,7 +33,23 @@ import Heading from '@/components/_uikit/typography/Heading.vue'
   },
 })
 export default class DroneItem extends Vue {
-  private droneId = 0
+  private droneId = +this.$route.params.id
+  private isLoaded = false
+
+  private mounted() {
+    this.fetchDrone()
+  }
+
+  private fetchDrone() {
+    DroneModule.fetchDrone(this.droneId)
+      .then(() => this.isLoaded = true)
+      .catch((error) => console.log(error))
+  }
+
+
+  private get drone() {
+    return DroneModule.drone
+  }
 }
 </script>
 

@@ -2,13 +2,13 @@
   .drone-card
     p {{ drone.name }}
     ImagePlaceholder(
-      :src="drone.photoUrl"
+      :src="drone.photoUrl[0]"
     )
     p {{ drone.description }} 
     VBtn(
+      text
       @click="handleRedirect"
-    )
-    button.nice-button
+    ) Перейти к товару
 </template>
 <script lang='ts'>
 import Vue from 'vue'
@@ -34,7 +34,7 @@ export default class DroneItemList extends Vue {
       name: 'drone.item',
       params: {
         id: this.drone.id.toString(),
-      }
+      },
     })
   }
 }

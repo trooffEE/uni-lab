@@ -23,12 +23,11 @@ import api from '@/utils/services/api'
 class Auth extends VuexModule {
   // ---------------------------- Token ---------------------------- >>
 
-  token = ''
+  token = localStorage.getItem('token') || '' 
 
   @Mutation
   setToken (payload: string) {
     localStorage.setItem('token', payload)
-    this.token = payload
   }
 
   // ---------------------------- User ---------------------------- >>

@@ -3,22 +3,31 @@
     .image-container
       img(src="~@/assets/images/placeholders/drone.jpg")
     .description-container
-      p lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem 
+      p {{ drone.description }} 
       .description-container__specs
-        .description-container__specs-item скорость 115 км/ч
-        .description-container__specs-item скорость 115 км/ч
-        .description-container__specs-item скорость 115 км/ч
-        .description-container__specs-item скорость 115 км/ч
-        .description-container__specs-item скорость 115 км/ч
+        .description-container__specs-item скорость {{ droneSpecs.speed }} км/ч
+        .description-container__specs-item мак.высота подъёма {{ droneSpecs.maxHight }} м
+        .description-container__specs-item вес {{ droneSpecs.wight }} кг
+        .description-container__specs-item время работы {{ droneSpecs.workTime }} минут
+        .description-container__specs-item iq {{ droneSpecs.iq }}
       
 </template>
 <script lang='ts'>
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { Prop } from 'vue-property-decorator'
+
+// Store
+import { IDroneExtended } from '@/store/types'
 
 @Component
 export default class DroneContent extends Vue {
-  
+  @Prop({ required: true })
+  readonly drone!: IDroneExtended
+
+  private get droneSpecs() {
+    return this.drone.specs
+  }
 }
 </script>
 

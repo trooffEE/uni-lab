@@ -1,6 +1,6 @@
 <template lang="pug">
   Wrapper.header
-    RouterLink(to="/drone")
+    RouterLink(to="/drone").image
       img(src="~@/assets/images/logo.svg")
     .link-container(v-if="isAutheicated")
       RouterLink(:to="routerLink.to" v-for="routerLink in routerLinks" :key="routerLink.to") {{ routerLink.name }}
@@ -11,6 +11,7 @@ import { Component } from 'vue-property-decorator'
 
 import Wrapper from '@/components/Wrapper.vue'
 import AuthModule from '@/store/modules/auth'
+import DroneModule from '@/store/modules/drone'
 
 @Component({
   components: {
@@ -38,7 +39,7 @@ export default class Header extends Vue {
       },
       {
         name: 'Случайный дрон',
-        to: '/drone/3',
+        to: `/drone/${this.randomDroneId}`,
       },
     ]
 
@@ -46,13 +47,20 @@ export default class Header extends Vue {
 
     return localLinks
   }
+
+  private get randomDroneId() {
+    if (DroneModule.drones.length) {
+      return DroneModule.drones[Math.floor(Math.random() * DroneModule.drones.length)].id
+    }
+    return 1 // fallback
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .header {
   background: #005BC1;
-  img, .link-container {
+  .image, .link-container {
     grid-column: span 6;
     color: $color-font-secondary;
   }

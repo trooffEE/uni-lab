@@ -2,7 +2,7 @@ import { Action, Module, Mutation, VuexModule, getModule } from 'vuex-module-dec
 
 import store from '@/store'
 import api from '@/utils/services/api'
-import { IDrone } from '@/store/types'
+import { IDrone, IDroneExtended } from '@/store/types'
 
 /**
  * Работа с дронами/квадракоптерами
@@ -35,16 +35,16 @@ class Drone extends VuexModule {
   }
 
   // -------------------------------- Drone Item ---------------------------->
-  drone: IDrone | null = null
+  drone: IDroneExtended | null = null
 
   @Mutation
-  setDrone(payload: IDrone) {
+  setDrone(payload: IDroneExtended) {
     this.drone = payload
   }
 
   @Action({ rawError: true })
   async fetchDrone (droneId: number) {
-    const { data } = await api.get<IDrone>(
+    const { data } = await api.get<IDroneExtended>(
       `/kvadrakopters/${droneId}`,
     )
     
