@@ -15,6 +15,7 @@ import { IDrone } from '@/store/types'
   store,
 })
 class Drone extends VuexModule {
+  // -------------------------------- Drones ---------------------------->
   drones: IDrone[] = []
 
   @Mutation
@@ -29,6 +30,25 @@ class Drone extends VuexModule {
     )
     
     this.setDrones(data)
+
+    return data
+  }
+
+  // -------------------------------- Drone Item ---------------------------->
+  drone: IDrone | null = null
+
+  @Mutation
+  setDrone(payload: IDrone) {
+    this.drone = payload
+  }
+
+  @Action({ rawError: true })
+  async fetchDrone (droneId: number) {
+    const { data } = await api.get<IDrone>(
+      `/kvadrakopters/${droneId}`,
+    )
+    
+    this.setDrone(data)
 
     return data
   }

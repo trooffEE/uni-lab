@@ -5,6 +5,9 @@
       :src="drone.photoUrl"
     )
     p {{ drone.description }} 
+    VBtn(
+      @click="handleRedirect"
+    )
     button.nice-button
 </template>
 <script lang='ts'>
@@ -25,6 +28,15 @@ import { IDrone } from '@/store/types'
 export default class DroneItemList extends Vue {
   @Prop({ required: true })
   readonly drone!: IDrone
+
+  private handleRedirect() {
+    this.$router.push({
+      name: 'drone.item',
+      params: {
+        id: this.drone.id.toString(),
+      }
+    })
+  }
 }
 </script>
 
